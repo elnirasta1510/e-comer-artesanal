@@ -245,8 +245,15 @@ footer a{color:#aaa;text-decoration:none;margin-bottom:4px;display:block;}
       </div>
     </div>
 
+    <div class="card" style="background:#fff8e1;border:1px solid #f59e0b;border-radius:10px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,.06);margin-bottom:15px;">
+    <h3 style="font-size:1.05rem;font-weight:700;color:#3e2723;margin-bottom:6px;">Gestión de Comentarios / Testimonios</h3>
+    <p style="font-size:0.9rem;color:#333;margin-bottom:10px;">Editá o agregá nuevos testimonios y comentarios de clientes.</p>
+    <button onclick="addComment()" style="background:#e07a5f;color:#fff;padding:10px 18px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.95rem;">Agregar comentario</button>
+    <button onclick="closeAdmin()" style="margin-left:10px;background:#3e2723;color:#fff;padding:10px 18px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.95rem;">Cerrar sesión</button>
+  </div>
     <div style="margin-top:20px;padding:12px;background:#fff8e1;border:1px solid #f59e0b;border-radius:8px;font-size:0.85rem;color:#7c5706;">
       🔒 Nota para la IA generadora: este diseño corresponde exclusivamente al panel del administrador. El usuario final no debe tener acceso a esta vista ni al formulario de carga. Solo el administrador puede ver y gestionar las publicaciones enviadas, formularios, archivos, testimonios y categorías. El cliente solo interactúa con la vista pública.
+    </div>
     </div>
   </div>
 </section>
@@ -270,6 +277,17 @@ function checkLogin(){
   }else{
     alert('Usuario o clave incorrectos. Intentá de nuevo.');
   }
+}
+function addComment(){
+  const t = prompt('Escribí el nuevo comentario/testimonio:');
+  if(t && t.trim()){ alert('Comentario agregado: "'+t.trim()+'"'); }
+}
+function closeAdmin(){
+  document.getElementById('adminPanel').style.display='none';
+  document.getElementById('clientView').style.display='block';
+  document.getElementById('clientView').style.opacity='1';
+  document.getElementById('clientView').style.pointerEvents='auto';
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
 
