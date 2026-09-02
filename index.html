@@ -10,7 +10,7 @@
 body{background:var(--bg);color:var(--ink);line-height:1.35;}
 
 /* Header */
-header{background:linear-gradient(90deg,#3e2723,#6F4E37);color:#fff;padding:16px 30px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #e07a5f;}
+header{background:#8B0000;color:#fff;padding:16px 30px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #ff4444;}
 header .logo{font-weight:800;font-size:1.2rem;letter-spacing:-0.5px;color:#fff;}
 nav a{color:#ffe4c4;text-decoration:none;margin-left:18px;font-weight:500;font-size:0.9rem;}
 
@@ -55,12 +55,12 @@ footer a{color:#aaa;text-decoration:none;margin-bottom:4px;display:block;}
 <div id="clientView">
 
 <header>
-  <div class="logo">🍫 ARTESANAL — E-COMER LOCAL</div>
+  <div class="logo">ARTESANAL — E-COMER LOCAL</div>
   <nav>
     <a href="#">Inicio</a>
     <a href="#">Tienda</a>
     <a href="#">Suscríbete</a>
-    <a href="#" onclick="showLogin()" style="color:#e07a5f;font-weight:700;">Login Admin</a>
+    <a href="#" onclick="showLogin()" style="color:#ff4444;font-weight:700;">Login Admin</a>
   </nav>
 </header>
 
@@ -254,14 +254,17 @@ footer a{color:#aaa;text-decoration:none;margin-bottom:4px;display:block;}
 <script>
 function showLogin(){
   const box=document.getElementById('loginBox');
-  if(box.style.display==='none'||!box.style.display){box.style.display='block'; document.getElementById('clientView').style.opacity='0.35'; document.getElementById('clientView').style.pointerEvents='none'; scrollTo({top:0,behavior:'smooth'});}
+  box.style.display='block';
+  box.style.background='rgba(255,255,255,0.98)';
+  document.getElementById('clientView').style.opacity='1';
+  document.getElementById('clientView').style.pointerEvents='auto';
+  scrollTo({top:box.offsetTop-20,behavior:'smooth'});
 }
 function checkLogin(){
   const u=document.getElementById('user').value.trim();
   const p=document.getElementById('pass').value.trim();
   if(u==='administrador' && p==='Niko154598633..$'){
-    document.getElementById('clientView').style.display='none';
-    document.getElementById('adminPanel').style.display='block';
+    document.getElementById('adminPanel').style.display='block'; document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'});
     document.getElementById('loginBox').style.display='none';
     document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'});
   }else{
