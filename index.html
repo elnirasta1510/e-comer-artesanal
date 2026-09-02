@@ -75,7 +75,7 @@ footer a{color:#aaa;text-decoration:none;margin-bottom:4px;display:block;}
   <input type="text" id="user" placeholder="Usuario" value="administrador">
   <input type="password" id="pass" placeholder="Contraseña">
   <button onclick="checkLogin()">Ingresar al panel</button>
-  <p class="hint">Usuario: administrador | Clave: Niko154598633..$</p>
+  <p class="hint">Clave requerida. Contactá al administrador si olvidaste las credenciales.</p>
   <p style="font-size:0.75rem;color:#777;">Nota: esta es una vista de demostración. El acceso real requiere autenticación segura.</p>
 </div>
 
@@ -83,7 +83,7 @@ footer a{color:#aaa;text-decoration:none;margin-bottom:4px;display:block;}
   <section aria-label="Categorías" style="margin-bottom:40px;">
     <h2 style="text-align:center;font-size:1.3rem;color:#3e2723;margin-bottom:16px;">Categorías destacadas</h2>
     <div class="grid-4">
-      <div class="cat-box"><div style="font-size:2rem;"></div><h3>Chocolates</h3></div>
+      <div class="cat-box"><div style="font-size:2rem;">🍫</div><h3>Chocolates</h3></div>
       <div class="cat-box"><div style="font-size:2rem;">☕</div><h3>Café</h3></div>
       <div class="cat-box"><div style="font-size:2rem;">🍺</div><h3>Cervezas</h3></div>
       <div class="cat-box"><div style="font-size:2rem;">🧶</div><h3>Artesanías</h3></div>
@@ -268,7 +268,7 @@ function checkLogin(){
     document.getElementById('loginBox').style.display='none';
     document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'});
   }else{
-    alert('Usuario o clave incorrectos. Use: administrador / Niko154598633..$');
+    alert('Usuario o clave incorrectos. Intentá de nuevo.');
   }
 }
 </script>
