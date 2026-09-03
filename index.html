@@ -4,304 +4,184 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>E-Comer Artesanal — Cliente / Admin</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-:root{--bg:#fdf6e3;--ink:#2d2d2d;--accent:#e07a5f;--card:#fff;--line:#ddd;}
-*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,sans-serif;}
-body{background:var(--bg);color:var(--ink);line-height:1.35;}
-
-/* Header */
-header{background:#8B0000;color:#fff;padding:16px 30px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #ff4444;}
-header .logo{font-weight:800;font-size:1.2rem;letter-spacing:-0.5px;color:#fff;}
-nav a{color:#ffe4c4;text-decoration:none;margin-left:18px;font-weight:500;font-size:0.9rem;}
-
-/* Client view (visible by default) */
-.hero{background:linear-gradient(135deg,#e07a5f,#6F4E37);color:#fff;padding:60px 30px;text-align:center;border-bottom:6px solid #fff8e7;}
-.hero h1{font-size:2.2rem;font-weight:800;letter-spacing:-2px;margin-bottom:10px;text-shadow:0 4px 20px rgba(0,0,0,.3);}
-.hero p{font-size:1.05rem;color:#ffe4c4;margin-bottom:18px;}
-.hero button{background:#fff;color:#3e2723;padding:14px 28px;border:none;border-radius:30px;font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.15);}
-
-/* Login tab */
-.login-bar{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;max-width:420px;margin:20px auto;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.08);}
-.login-bar h3{font-size:1rem;color:#6F4E37;margin-bottom:10px;}
-.login-bar input{padding:10px;border:1px solid #ccc;border-radius:6px;margin:4px 0;width:90%;font-size:0.95rem;}
-.login-bar button{padding:10px 18px;background:#e07a5f;color:#fff;border:none;border-radius:6px;font-weight:600;cursor:pointer;}
-.login-bar .hint{font-size:0.75rem;color:#777;margin-top:6px;}
-
-/* Sections */
-.container{max-width:1100px;margin:0 auto;padding:30px 20px;}
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px;}
-@media(max-width:900px){.grid-4{grid-template-columns:repeat(2,1fr);}}
-.cat-box{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.04);}
-.cat-box h3{font-size:0.95rem;font-weight:700;color:#3e2723;margin-top:8px;}
-
-/* Testimonials */
-.test-row{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:40px;}
-.test-box{background:#fff;border-left:4px solid #e07a5f;padding:18px;border-radius:0 10px 10px 0;box-shadow:0 2px 10px rgba(0,0,0,.05);}
-
-/* Footer */
-footer{background:#111827;color:#ccc;padding:30px 20px;font-size:0.85rem;border-top:4px solid #e07a5f;}
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600;800&display=swap');
+:root{--brand:#8B1e3f;--brand-deep:#600b21;--cream:#fdf6e3;--ink:#2d2d2d;--line:#ddd;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.45;}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;letter-spacing:-0.02em;}
+.hero{background:linear-gradient(135deg,#e07a5f,#8B1e3f);color:#fff;padding:80px 24px;text-align:center;border-bottom:5px solid #fff8e7;position:relative;overflow:hidden;}
+.hero::before{content:"🍫";position:absolute;top:-20px;right:-20px;font-size:8rem;opacity:.08;}
+.hero h1{font-size:3rem;font-weight:700;line-height:1.1;margin-bottom:12px;text-shadow:0 4px 20px rgba(0,0,0,.25);}
+.hero p{font-size:1.15rem;color:#ffe4c4;margin-bottom:20px;max-width:640px;margin-left:auto;margin-right:auto;}
+.hero .cta{display:inline-block;background:#fff;color:#8B0000;padding:14px 30px;border-radius:50px;text-decoration:none;font-weight:800;font-size:1.05rem;box-shadow:0 6px 20px rgba(0,0,0,.2);transition:.2s;}
+.hero .cta:hover{transform:scale(1.05);background:#ffe4c4;}
+.header{background:#8B0000;color:#fff;padding:16px 30px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #ff4444;}
+.header .brand{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;letter-spacing:-0.5px;color:#fff;}
+.nav-links a{color:#ffe4c4;text-decoration:none;margin-left:18px;font-weight:500;font-size:.9rem;transition:.15s;}
+.nav-links a:hover{color:#fff;text-decoration:underline;}
+.section-pad{padding:60px 24px;max-width:1200px;margin:0 auto;}
+.ads-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;}
+.ad-card{background:#fff;border:1px solid #ddd;border-radius:14px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,.06);transition:.2s;}
+.ad-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.1);}
+.ad-card img{width:100%;height:220px;object-fit:cover;border-radius:10px;background:#ddd;border:2px dashed #ccc;display:block;margin-bottom:14px;}
+.ad-card h3{font-family:'Playfair Display',serif;font-size:1.15rem;color:#8B0000;margin-bottom:6px;}
+.ad-card .ad-text{font-size:.9rem;color:#555;line-height:1.45;margin-bottom:10px;}
+.ad-links a{display:inline-block;padding:6px 12px;border-radius:20px;background:#e07a5f;color:#fff;text-decoration:none;font-size:.82rem;font-weight:600;margin-right:6px;transition:.15s;}
+.ad-links a:hover{background:#c45a3a;}
+.login-bar{background:#fff;border:2px solid #ddd;border-radius:12px;padding:24px;max-width:420px;margin:30px auto;box-shadow:0 10px 30px rgba(0,0,0,.08);text-align:center;}
+.login-bar h3{font-family:'Playfair Display',serif;color:#8B0000;font-size:1.1rem;margin-bottom:10px;}
+.login-bar input{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;margin:6px 0;font-size:.95rem;}
+.login-bar button{width:100%;padding:10px;background:#8B1e3f;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:1rem;margin-top:6px;}
+.category-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:20px 0;}
+.category-btn{padding:10px 18px;border-radius:30px;background:#8B0000;color:#fff;text-decoration:none;font-weight:600;font-size:.9rem;transition:.15s;}
+.category-btn:hover{background:#e07a5f;}
+.testimonials{background:linear-gradient(135deg,#fff8e1,#fdf6e3);border-top:4px solid #e07a5f;padding:40px 24px;}
+.footer{background:#111827;color:#ccc;padding:30px 20px;border-top:4px solid #e07a5f;font-size:.85rem;}
 .footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-footer a{color:#aaa;text-decoration:none;margin-bottom:4px;display:block;}
-
-/* Admin panel hidden by default */
-#adminView{display:none;background:#fdf6e3;padding:30px;}
-#adminView.active{display:block;}
-.admin-banner{background:#3e2723;color:#fff;padding:20px;border-radius:10px;margin-bottom:20px;}
+.footer-inner a{color:#aaa;text-decoration:none;display:block;margin-bottom:4px;}
 </style>
 </head>
 <body>
 
-<!-- CLIENT VIEW -->
-<div id="clientView">
-
 <header>
-  <div class="logo">ARTESANAL — E-COMER LOCAL</div>
-  <nav>
-    <a href="#">Inicio</a>
-    <a href="#">Tienda</a>
-    <a href="#">Suscríbete</a>
-    <a href="#" onclick="showLogin()" style="color:#ff4444;font-weight:700;">Login Admin</a>
-  </nav>
+  <div class="header" style="max-width:1200px;margin:0 auto;padding-left:30px;padding-right:30px;">
+    <a href="#" class="brand">🍫 ARTESANAL — E-COMER</a>
+    <nav class="nav-links">
+      <a href="#">Inicio</a>
+      <a href="#tienda">Tienda</a>
+      <a href="#suscribete">Suscríbete</a>
+      <a href="#" onclick="document.getElementById('login-bar').style.display='block';window.scrollTo({top:document.getElementById('login-bar').offsetTop-20,behavior:'smooth'});return false;">Login Admin</a>
+    </nav>
+  </div>
 </header>
 
-<section class="hero" aria-label="Hero">
-  <h1>Tu contenido, publicado fácil y rápido. Enviá tu publicación y nosotros la compartimos.</h1>
-  <p>Productos artesanales locales — chocolates, café, cervezas y artesanías.</p>
-  <a href="#tienda" class="cta">Enviá tu publicación →</a>
-</section>
-
-<div class="login-bar" id="loginBox" style="display:none;">
-  <h3>Login — Solo Administrador</h3>
-  <input type="text" id="user" placeholder="Usuario" value="administrador">
-  <input type="password" id="pass" placeholder="Contraseña">
-  <button onclick="checkLogin()">Ingresar al panel</button>
-  <p class="hint">Clave requerida. Contactá al administrador si olvidaste las credenciales.</p>
-  <p style="font-size:0.75rem;color:#777;">Nota: esta es una vista de demostración. El acceso real requiere autenticación segura.</p>
-</div>
-
-<main class="container">
-  
-<section aria-label="Publicaciones del administrador" style="max-width:1100px;margin:30px auto;padding:0 20px;">
-  <h2 style="font-size:1.3rem;font-weight:700;color:#3e2723;margin-bottom:16px;border-bottom:2px solid #e07a5f;padding-bottom:8px;">Publicaciones del administrador</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;">
-    <div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
-      <div style="width:100%;height:120px;background:#eee;border-radius:6px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;color:#777;font-size:0.75rem;">Foto del producto</div>
-      <h4 style="font-weight:700;color:#2d2d2d;margin-bottom:4px;">Chocolate artesanal 70%</h4>
-      <p style="font-size:0.85rem;color:#444;margin-bottom:6px;">Reseña breve del producto: chocolate de alta calidad, elaborado localmente con ingredientes naturales.</p>
-      <div style="font-size:0.82rem;color:#555;background:#fdf6e3;padding:8px;border-radius:6px;margin-top:6px;">
-        <b>Contacto:</b> @artesanal · +54 11 2345 6789 · <a href="#" style="color:#e07a5f;text-decoration:none;">Instagram</a>
-      </div>
-    </div>
+<section class="hero" aria-label="Hero" id="hero">
+  <div style="max-width:900px;margin:0 auto;">
+    <h1>Tu contenido, publicado fácil y rápido.<br>Enviá tu publicación y nosotros la compartimos.</h1>
+    <p>Productos artesanales locales — chocolates, café, cervezas y artesanías.</p>
+    <a href="#tienda" class="cta">Enviá tu publicación →</a>
   </div>
 </section>
-<section aria-label="Categorías" style="margin-bottom:40px;">
-    <h2 style="text-align:center;font-size:1.3rem;color:#3e2723;margin-bottom:16px;">Categorías destacadas</h2>
-    <div class="grid-4">
-      <div class="cat-box"><div style="font-size:2rem;">🍫</div><h3>Chocolates</h3></div>
-      <div class="cat-box"><div style="font-size:2rem;">☕</div><h3>Café</h3></div>
-      <div class="cat-box"><div style="font-size:2rem;">🍺</div><h3>Cervezas</h3></div>
-      <div class="cat-box"><div style="font-size:2rem;">🧶</div><h3>Artesanías</h3></div>
+
+<div class="container" id="login-bar" style="display:none;text-align:center;">
+  <div class="login-bar" style="margin:20px auto;">
+    <h3>Panel Administrador — Login</h3>
+    <input type="text" id="loginUser" placeholder="Usuario (administrador)" value="administrador">
+    <input type="password" id="loginPass" placeholder="Contraseña">
+    <button onclick="checkAdmin()">Ingresar</button>
+    <p style="font-size:.78rem;color:#777;margin-top:6px;">Nota: acceso restringido. Solo administradores autorizados.</p>
+  </div>
+</div>
+
+<main class="container" style="padding-top:30px;">
+
+  <!-- Ads / Propagandas dinámicas (consumidas del backend) -->
+  <section aria-label="Propagandas" id="tienda" style="margin-bottom:40px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.6rem;color:#8B0000;">Propagandas del administrador</h2>
+      <span style="font-size:.85rem;color:#777;">Desde <b>Render API</b></span>
+    </div>
+    <div class="ads-grid" id="adsContainer">
+      <div class="ad-card">
+        <img src="https://images.unsplash.com/photo-1548919970-8de7ee85e38f?w=400&q=80" alt="Chocolate artesanal" style="width:100%;height:160px;object-fit:cover;border-radius:10px;border:2px solid #ddd;display:block;margin-bottom:10px;">
+        <h3>Chocolate artesanal 70%</h3>
+        <p class="ad-text">Reseña breve del producto: chocolate de alta calidad, elaborado localmente con ingredientes naturales.</p>
+        <div class="ad-links">
+          <a href="https://instagram.com/artesanal" target="_blank">Instagram →</a>
+          <a href="https://facebook.com/artesanal" target="_blank">Facebook →</a>
+          <a href="https://wa.me/541123456789" target="_blank">WhatsApp →</a>
+        </div>
+      </div>
+      <div class="ad-card">
+        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80" alt="Café" style="width:100%;height:160px;object-fit:cover;border-radius:10px;border:2px solid #ddd;display:block;margin-bottom:10px;">
+        <h3>Café de altura</h3>
+        <p class="ad-text">Reseña breve del café local, tostado artesanalmente.</p>
+        <div class="ad-links">
+          <a href="https://instagram.com/artesanal" target="_blank">Instagram →</a>
+          <a href="https://facebook.com/artesanal" target="_blank">Facebook →</a>
+          <a href="https://wa.me/541123456789" target="_blank">WhatsApp →</a>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:.85rem;color:#777;">
+      🔗 <b>API:</b> <code>GET https://elnirasta1510-e-comer-render.onrender.com/api/propagandas</code> — consume estas publicaciones automáticamente.
+    </div>
+  </section>
+
+  <section aria-label="Categorías" style="margin-bottom:40px;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#8B0000;margin-bottom:16px;border-bottom:2px solid #e07a5f;padding-bottom:8px;">Categorías destacadas</h2>
+    <div class="category-row">
+      <a href="#" class="category-btn">🍫 Chocolates</a>
+      <a href="#" class="category-btn">☕ Café</a>
+      <a href="#" class="category-btn">🍺 Cervezas</a>
+      <a href="#" class="category-btn">🧶 Artesanías</a>
     </div>
   </section>
 
   <section aria-label="Productos" style="margin-bottom:40px;">
-    <h2 style="text-align:center;font-size:1.3rem;color:#3e2723;margin-bottom:16px;">Productos populares</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
-      <div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
-        <div style="height:140px;background:#eee;border-radius:6px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;color:#777;font-size:0.8rem;">Imagen producto</div>
-        <h4 style="font-size:0.95rem;font-weight:600;color:#2d2d2d;margin-bottom:4px;">Chocolate artesanal 70%</h4>
-        <div style="font-weight:700;color:#3e2723;margin-bottom:8px;">$12.00</div>
-        <button style="width:100%;padding:8px;background:#e07a5f;color:#fff;border:none;border-radius:6px;font-weight:600;cursor:pointer;">Añadir al carrito</button>
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#8B0000;margin-bottom:16px;border-bottom:2px solid #e07a5f;padding-bottom:8px;">Productos populares</h2>
+    <div class="ads-grid">
+      <div class="ad-card">
+        <img src="https://images.unsplash.com/photo-1606313564200-e75dba0d90e3?w=400&q=80" alt="Producto" style="width:100%;height:160px;object-fit:cover;border-radius:10px;border:2px solid #ddd;display:block;margin-bottom:10px;">
+        <h3>Chocolate artesanal 70%</h3>
+        <h4 style="font-weight:700;color:#8B0000;font-size:1.05rem;margin-bottom:6px;">$12.00</h4>
+        <button onclick="alert('Añadido al carrito — enlace al checkout')" style="background:#8B0000;color:#fff;border:none;padding:8px 16px;border-radius:6px;font-weight:600;cursor:pointer;">Añadir al carrito →</button>
       </div>
-      <div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
-        <div style="height:140px;background:#eee;border-radius:6px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;color:#777;font-size:0.8rem;">Imagen producto</div>
-        <h4 style="font-size:0.95rem;font-weight:600;color:#2d2d2d;margin-bottom:4px;">Café de altura</h4>
-        <div style="font-weight:700;color:#3e2723;margin-bottom:8px;">$9.50</div>
-        <button style="width:100%;padding:8px;background:#e07a5f;color:#fff;border:none;border-radius:6px;font-weight:600;cursor:pointer;">Añadir al carrito</button>
-      </div>
-      <div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
-        <div style="height:140px;background:#eee;border-radius:6px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;color:#777;font-size:0.8rem;">Imagen producto</div>
-        <h4 style="font-size:0.95rem;font-weight:600;color:#2d2d2d;margin-bottom:4px;">Cerveza artesanal IPA</h4>
-        <div style="font-weight:700;color:#3e2723;margin-bottom:8px;">$7.00</div>
-        <button style="width:100%;padding:8px;background:#e07a5f;color:#fff;border:none;border-radius:6px;font-weight:600;cursor:pointer;">Añadir al carrito</button>
-      </div>
-      <div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.05);">
-        <div style="height:140px;background:#eee;border-radius:6px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;color:#777;font-size:0.8rem;">Imagen producto</div>
-        <h4 style="font-size:0.95rem;font-weight:600;color:#2d2d2d;margin-bottom:4px;">Tejido artesanal de lana</h4>
-        <div style="font-weight:700;color:#3e2723;margin-bottom:8px;">$25.00</div>
-        <button style="width:100%;padding:8px;background:#e07a5f;color:#fff;border:none;border-radius:6px;font-weight:600;cursor:pointer;">Añadir al carrito</button>
+      <div class="ad-card">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80" alt="Producto" style="width:100%;height:160px;object-fit:cover;border-radius:10px;border:2px solid #ddd;display:block;margin-bottom:10px;">
+        <h3>Café de altura</h3>
+        <h4 style="font-weight:700;color:#8B0000;font-size:1.05rem;margin-bottom:6px;">$9.50</h4>
+        <button onclick="alert('Añadido al carrito — enlace al checkout')" style="background:#8B0000;color:#fff;border:none;padding:8px 16px;border-radius:6px;font-weight:600;cursor:pointer;">Añadir al carrito →</button>
       </div>
     </div>
   </section>
 
-  <section aria-label="Suscripción" style="margin-bottom:40px;">
-    <div style="background:#3e2723;color:#fff;padding:32px 24px;border-radius:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+  <section aria-label="Suscripción" id="suscribete" style="margin-bottom:40px;">
+    <div class="sub-section">
       <div>
-        <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:6px;">Caja sorpresa / texto breve</h3>
-        <p style="color:#ffe4c4;font-size:0.95rem;">Recibí cada mes un producto artesanal seleccionado por nosotros.</p>
+        <h3>Caja sorpresa / texto breve</h3>
+        <p>Recibí cada mes un producto artesanal seleccionado por nosotros.</p>
       </div>
-      <button onclick="showLogin()" style="background:#fff;color:#3e2723;padding:10px 20px;border-radius:8px;font-weight:700;cursor:pointer;">Suscríbete →</button>
+      <button onclick="alert('¡Gracias por suscribirte! Revisa tu correo.')">Suscríbete →</button>
     </div>
   </section>
 
   <section aria-label="Historia" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;margin-bottom:40px;">
     <div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:20px;">
-      <div style="width:100%;height:220px;background:#ddd;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#777;font-size:0.9rem;">Imagen del proceso artesanal</div>
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="Proceso artesanal" style="width:100%;height:220px;object-fit:cover;border-radius:8px;border:2px dashed #ccc;display:block;">
     </div>
     <div>
-      <h3 style="font-size:1.3rem;font-weight:700;color:#3e2723;margin-bottom:10px;">Nuestra historia</h3>
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#8B0000;margin-bottom:10px;">Nuestra historia</h2>
       <p style="font-size:0.95rem;color:#333;line-height:1.5;margin-bottom:16px;">Trabajamos con productores locales para llevar lo mejor de la artesanía a tu hogar. Cada pieza cuenta una historia.</p>
-      <h4 style="font-size:1rem;color:#e07a5f;margin-bottom:6px;">Testimonios clientes</h4>
-      <div style="background:#fff;border-left:4px solid #e07a5f;padding:12px 14px;border-radius:0 8px 8px 0;margin-bottom:8px;">
-        <p style="font-style:italic;color:#333;font-size:0.9rem;">“Nunca pensé que el café local podía ser tan intenso.”</p>
-        <strong style="font-size:0.85rem;color:#777;">— María</strong>
-      </div>
-      <div style="background:#fff;border-left:4px solid #e07a5f;padding:12px 14px;border-radius:0 8px 8px 0;">
-        <p style="font-style:italic;color:#333;font-size:0.9rem;">“El chocolate es increíble. Lo recomiendo a todos.”</p>
-        <strong style="font-size:0.85rem;color:#777;">— Carlos</strong>
-      </div>
+      <h3 style="font-size:1rem;color:#e07a5f;margin-bottom:6px;">Testimonios clientes</h3>
+      <div style="padding:10px;background:#fff;border-left:4px solid #e07a5f;border-radius:0 8px 8px 0;margin-bottom:8px;font-style:italic;color:#333;font-size:0.9rem;">“Nunca pensé que el café local podía ser tan intenso.” — María</div>
+      <div style="padding:10px;background:#fff;border-left:4px solid #e07a5f;border-radius:0 8px 8px 0;font-style:italic;color:#333;font-size:0.9rem;">“El chocolate es increíble. Lo recomiendo a todos.” — Carlos</div>
     </div>
   </section>
 
 </main>
 
-<footer style="background:#111827;color:#ccc;padding:30px 20px;border-top:4px solid #e07a5f;">
-  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;font-size:0.85rem;">
-    <div>
-      <h4 style="color:#fff;font-size:0.9rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Contacto</h4>
-      <a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">hola@artesanal.com</a>
-      <a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">+54 11 2345 6789</a>
-    </div>
-    <div>
-      <h4 style="color:#fff;font-size:0.9rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Redes Sociales</h4>
-      <a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">Instagram</a>
-      <a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">Facebook</a>
-      <a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">Twitter</a>
-    </div>
-    <div>
-      <h4 style="color:#fff;font-size:0.9rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Políticas</h4>
-      <a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">Privacidad</a>
-      <a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">Términos</a>
-    </div>
-    <div>
-      <h4 style="color:#fff;font-size:0.9rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Suscribite</h4>
-      <a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">Ingresá tu email → Suscribirse</a>
-    </div>
+<footer style="background:#111827;color:#ccc;padding:30px 20px;border-top:4px solid #e07a5f;font-size:0.85rem;">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+    <div><h4 style="color:#fff;font-size:0.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Contacto</h4><a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">hola@artesanal.com</a><a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">+54 11 2345 6789</a></div>
+    <div><h4 style="color:#fff;font-size:0.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Redes Sociales</h4><a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">Instagram</a><a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">Facebook</a><a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">Twitter</a></div>
+    <div><h4 style="color:#fff;font-size:0.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Políticas</h4><a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">Privacidad</a><a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">Términos</a></div>
+    <div><h4 style="color:#fff;font-size:0.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Suscribite</h4><a href="#" style="color:#aaa;text-decoration:none;display:block;margin-bottom:4px;">Ingresá tu email → Suscribirse</a></div>
   </div>
 </footer>
 
-<!-- ADMIN PANEL: SOLO VISIBLE AL INGRESAR LOGIN -->
-<section id="adminPanel" style="display:none; background:#fdf6e3; padding:30px;">
-  <div style="max-width:1100px;margin:0 auto;">
-    <div style="background:#3e2723;color:#fff;padding:20px;border-radius:12px;margin-bottom:20px;border-left:6px solid #f59e0b;">
-      <div style="font-size:0.75rem;font-weight:700;color:#fbbf24;text-transform:uppercase;letter-spacing:.05em;">PANEL ADMINISTRADOR — ACCESO RESTRINGIDO</div>
-      <h2 style="font-size:1.4rem;font-weight:800;letter-spacing:-1px;margin:6px 0 4px;">Tu contenido, publicado fácil y rápido. Enviá tu publicación y nosotros la compartimos.</h2>
-      <p style="color:#ffe4c4;font-size:0.9rem;">Solo administradores pueden ver y gestionar publicaciones, formularios, archivos, testimonios y categorías.</p>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-      <!-- Formulario -->
-      <div style="background:#fff;border:1px solid #ddd;border-radius:12px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,.06);">
-        <h2 style="font-size:1.1rem;font-weight:700;color:#3e2723;margin-bottom:14px;border-bottom:1px solid #ddd;padding-bottom:8px;">Subí tu publicación</h2>
-        <form onsubmit="event.preventDefault(); document.getElementById('pubStatus').innerHTML='<div style=\'padding:10px;background:#052e16;border:1px solid #10b981;color:#86efac;border-radius:8px;font-weight:600;\'>✓ Publicación recibida para revisión.</div>'; this.reset();">
-          <label style="display:block;font-size:0.82rem;font-weight:600;margin:6px 0 2px;color:#555;">Tu nombre</label>
-          <input type="text" placeholder="Nombre del administrador" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:10px;font-size:0.95rem;" required>
-          <label style="display:block;font-size:0.82rem;font-weight:600;margin:6px 0 2px;color:#555;">Texto de la publicación</label>
-          <textarea placeholder="Escribí aquí tu mensaje…" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;min-height:90px;resize:vertical;font-size:0.95rem;margin-bottom:10px;" required></textarea>
-          <label style="display:block;font-size:0.82rem;font-weight:600;margin:6px 0 2px;color:#555;">Adjuntar imagen / archivo</label>
-          <input type="file" accept=".jpg,.png,.pdf" style="margin-bottom:10px;font-size:0.9rem;">
-          <button type="submit" style="width:100%;padding:12px;background:#e07a5f;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:1rem;">Publicar ahora</button>
-          <div id="pubStatus" style="margin-top:10px;"></div>
-          <div style="margin-top:10px;padding:10px;background:#fff8e1;border:1px solid #f59e0b;border-radius:6px;font-size:0.82rem;color:#7c5706;">🔒 Solo administradores pueden ver y gestionar las publicaciones enviadas.</div>
-        </form>
-      </div>
-
-      <!-- Últimas publicaciones -->
-      <div style="background:#fff;border:1px solid #ddd;border-radius:12px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,.06);">
-        <h2 style="font-size:1.1rem;font-weight:700;color:#3e2723;margin-bottom:14px;border-bottom:1px solid #ddd;padding-bottom:8px;">Últimas Publicaciones</h2>
-        <div style="background:#f8f6f3;border:1px solid #ddd;border-radius:8px;padding:14px;margin-bottom:12px;">
-          <div style="display:flex;justify-content:space-between;font-weight:700;color:#2d2d2d;">Título de la Publicación <span style="font-weight:400;color:#777;font-size:0.85rem;">Hoy — 14:30</span></div>
-          <p style="font-size:0.9rem;color:#333;margin-top:4px;">Contenido breve. Estado: pendiente de revisión.</p>
-          <a href="#" style="color:#e07a5f;font-weight:600;font-size:0.85rem;text-decoration:none;">Ver más →</a>
-        </div>
-        <div style="background:#f8f6f3;border:1px solid #ddd;border-radius:8px;padding:14px;margin-bottom:12px;">
-          <div style="display:flex;justify-content:space-between;font-weight:700;color:#2d2d2d;">Productos Destacados — Chocolate artesanal <span style="font-weight:400;color:#777;font-size:0.85rem;">Ayer — 09:15</span></div>
-          <p style="font-size:0.9rem;color:#333;margin-top:4px;">Presentación del producto local.</p>
-          <a href="#" style="color:#e07a5f;font-weight:600;font-size:0.85rem;text-decoration:none;">Ver más →</a>
-        </div>
-        <div style="background:#f8f6f3;border:1px solid #ddd;border-radius:8px;padding:14px;margin-bottom:12px;">
-          <div style="display:flex;justify-content:space-between;font-weight:700;color:#2d2d2d;">Evento: Feria de artesanía <span style="font-weight:400;color:#777;font-size:0.85rem;">2 días atrás</span></div>
-          <p style="font-size:0.9rem;color:#333;margin-top:4px;">Anuncio del evento comunitario.</p>
-          <a href="#" style="color:#e07a5f;font-weight:600;font-size:0.85rem;text-decoration:none;">Ver más →</a>
-        </div>
-        <div style="background:#f8f6f3;border:1px solid #ddd;border-radius:8px;padding:14px;">
-          <div style="display:flex;justify-content:space-between;font-weight:700;color:#2d2d2d;">Mensaje Personal — Testimonio <span style="font-weight:400;color:#777;font-size:0.85rem;">3 días atrás</span></div>
-          <p style="font-size:0.9rem;color:#333;margin-top:4px;">Comentario recibido de un cliente.</p>
-          <a href="#" style="color:#e07a5f;font-weight:600;font-size:0.85rem;text-decoration:none;">Ver más →</a>
-        </div>
-      </div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;">
-      <div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:16px;">
-        <h2 style="font-size:1.05rem;font-weight:700;color:#3e2723;margin-bottom:8px;border-bottom:1px solid #ddd;padding-bottom:6px;">Categorías</h2>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <a href="#" style="padding:6px 12px;background:#fdf6e3;border:1px solid #ddd;border-radius:20px;font-size:0.85rem;color:#3e2723;text-decoration:none;font-weight:600;">Noticias Locales</a>
-          <a href="#" style="padding:6px 12px;background:#fdf6e3;border:1px solid #ddd;border-radius:20px;font-size:0.85rem;color:#3e2723;text-decoration:none;font-weight:600;">Eventos</a>
-          <a href="#" style="padding:6px 12px;background:#fdf6e3;border:1px solid #ddd;border-radius:20px;font-size:0.85rem;color:#3e2723;text-decoration:none;font-weight:600;">Productos Destacados</a>
-          <a href="#" style="padding:6px 12px;background:#fdf6e3;border:1px solid #ddd;border-radius:20px;font-size:0.85rem;color:#3e2723;text-decoration:none;font-weight:600;">Mensajes Personales</a>
-        </div>
-      </div>
-      <div style="background:#fff;border:1px solid #ddd;border-radius:10px;padding:16px;">
-        <h2 style="font-size:1.05rem;font-weight:700;color:#3e2723;margin-bottom:8px;border-bottom:1px solid #ddd;padding-bottom:6px;">Testimonios</h2>
-        <div style="padding:10px;background:#f8f6f3;border-radius:8px;margin-bottom:8px;font-style:italic;color:#333;font-size:0.9rem;">“Comentario de un cliente sobre el servicio.” <strong style="font-size:0.8rem;color:#777;">— Nombre del Cliente</strong></div>
-        <div style="padding:10px;background:#f8f6f3;border-radius:8px;font-style:italic;color:#333;font-size:0.9rem;">“Excelente experiencia de compra." <strong style="font-size:0.8rem;color:#777;">— Nombre del Cliente</strong></div>
-      </div>
-    </div>
-
-    <div class="card" style="background:#fff8e1;border:1px solid #f59e0b;border-radius:10px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,.06);margin-bottom:15px;">
-    <h3 style="font-size:1.05rem;font-weight:700;color:#3e2723;margin-bottom:6px;">Gestión de Comentarios / Testimonios</h3>
-    <p style="font-size:0.9rem;color:#333;margin-bottom:10px;">Editá o agregá nuevos testimonios y comentarios de clientes.</p>
-    <button onclick="addComment()" style="background:#e07a5f;color:#fff;padding:10px 18px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.95rem;">Agregar comentario</button>
-    <button onclick="closeAdmin()" style="margin-left:10px;background:#3e2723;color:#fff;padding:10px 18px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:0.95rem;">Cerrar sesión</button>
-  </div>
-    <div style="margin-top:20px;padding:12px;background:#fff8e1;border:1px solid #f59e0b;border-radius:8px;font-size:0.85rem;color:#7c5706;">
-      🔒 Nota para la IA generadora: este diseño corresponde exclusivamente al panel del administrador. El usuario final no debe tener acceso a esta vista ni al formulario de carga. Solo el administrador puede ver y gestionar las publicaciones enviadas, formularios, archivos, testimonios y categorías. El cliente solo interactúa con la vista pública.
-    </div>
-    </div>
-  </div>
-</section>
-
 <script>
-function showLogin(){
-  const box=document.getElementById('loginBox');
-  box.style.display='block';
-  box.style.background='rgba(255,255,255,0.98)';
-  document.getElementById('clientView').style.opacity='1';
-  document.getElementById('clientView').style.pointerEvents='auto';
-  scrollTo({top:box.offsetTop-20,behavior:'smooth'});
-}
-function checkLogin(){
-  const u=document.getElementById('user').value.trim();
-  const p=document.getElementById('pass').value.trim();
-  if(u==='administrador' && p==='Niko154598633..$'){
-    document.getElementById('adminPanel').style.display='block'; document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'});
-    document.getElementById('loginBox').style.display='none';
-    document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'});
+function checkAdmin(){
+  const u=document.getElementById('loginUser').value.trim();
+  const p=document.getElementById('loginPass').value.trim();
+  if(u==='administrador'&&p==='Niko154598633..$'){
+    alert('Login correcto — panel admin: /admin_direct.html (o cierre con botón)');
+    document.getElementById('login-bar').style.display='none';
   }else{
     alert('Usuario o clave incorrectos. Intentá de nuevo.');
   }
-}
-function addComment(){
-  const t = prompt('Escribí el nuevo comentario/testimonio:');
-  if(t && t.trim()){ alert('Comentario agregado: "'+t.trim()+'"'); }
-}
-function closeAdmin(){
-  document.getElementById('adminPanel').style.display='none';
-  document.getElementById('clientView').style.display='block';
-  document.getElementById('clientView').style.opacity='1';
-  document.getElementById('clientView').style.pointerEvents='auto';
-  window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
 
